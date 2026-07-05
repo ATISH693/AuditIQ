@@ -1,37 +1,35 @@
-fastapi
-uvicorn
-python-multipart
-requests
-python-dotenv
+fastapi==0.138.2
+uvicorn==0.49.0
+python-multipart==0.0.32
+requests==2.34.2
+python-dotenv==1.2.2
 
-langchain
-langchain-community
-langchain-core
-langchain-groq
-langchain-huggingface
+langchain==1.3.11
+langchain-community==0.4.2
+langchain-core==1.4.8
+langchain-groq==1.1.3
+langchain-huggingface==1.2.2
 
-pypdf
-pdfplumber
+pypdf==6.14.2
+pdfplumber==0.11.10
 
-chromadb
-faiss-cpu
+chromadb==1.5.9
+faiss-cpu==1.14.3
 
-openai
-groq
+openai==2.44.0
+groq==0.37.1
 
-transformers
-huggingface_hub
-tokenizers
-safetensors
-sentencepiece
+transformers==5.12.1
+huggingface_hub==1.21.0
+tokenizers==0.22.2
+safetensors==0.8.0
+sentencepiece==0.2.0
 
-numpy
-pydantic
+numpy==2.5.0
+pydantic==2.13.4
 
-google-generativeai
-google-genai
-google-ai-generativelanguage
-google-api-python-client
-google-auth
-google-adk==2.3.0
+google-generativeai==0.8.6
+google-genai==2.10.0
+google-ai-generativelanguage==0.6.15
+google-auth==2.55.1
 google-adk[extensions]==2.3.0
