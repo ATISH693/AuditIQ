@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../C Tutorials"
+		},
+		{
+			"path": "../../FastAPI"
+		},
+		{
+			"path": "../../API_Practice"
+		},
+		{
+			"path": "../../LangChain"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
