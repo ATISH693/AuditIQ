@@ -33,3 +33,4 @@ google-genai
 google-ai-generativelanguage
 google-api-python-client
 google-auth
+google-adk==2.3.0
