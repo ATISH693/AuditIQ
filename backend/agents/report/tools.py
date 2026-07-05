@@ -33,6 +33,8 @@ def create_audit_report(tool_context: ToolContext):
     filename = Path(pdf_path).name
 
     report["pdf_name"] = filename
+
+    report["pdf_url"] = f"http://127.0.0.1:8000/reports/{filename}"
     
     tool_context.state["report"] = report
 

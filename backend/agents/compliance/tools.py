@@ -1,5 +1,5 @@
 from google.adk.tools import ToolContext
-from backend.agents.compliance.check_compliance import check_compliance
+from agents.compliance.check_compliance import check_compliance
 from utils.logger import logger
 from agents.anomaly.tools import run_anomaly_detection
 

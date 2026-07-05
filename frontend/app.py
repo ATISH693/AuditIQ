@@ -5,33 +5,47 @@ import gradio as gr
 API_URL = "http://127.0.0.1:8000/audit_upload"
 
 
+# ---------------- SAFE API CALL ----------------
 def audit_invoice(pdf):
 
     if pdf is None:
-        raise gr.Error("Please upload a PDF.")
+        raise gr.Error("Please upload a PDF file.")
 
-    with open(pdf.name, "rb") as f:
-        response = requests.post(
-            API_URL,
-            files={"file": (os.path.basename(pdf.name), f, "application/pdf")}
-        )
+    try:
+        # ---------------- TIME WARNING ----------------
+        print("⏳ Processing started... this may take a few seconds to 1 minute")
 
-    print("Status Code:", response.status_code)
-    print("Response:", response.text)
+        with open(pdf.name, "rb") as f:
+            response = requests.post(
+                API_URL,
+                files={"file": (os.path.basename(pdf.name), f, "application/pdf")},
+                timeout=120  # IMPORTANT: avoid infinite hanging
+            )
 
-    if response.status_code != 200:
-        raise gr.Error(response.text)
+        print("Status Code:", response.status_code)
+        print("Response:", response.text)
 
-    result = response.json()
+        # ---------------- API ERROR HANDLING ----------------
+        if response.status_code != 200:
+            try:
+                error_detail = response.json()
+            except:
+                error_detail = response.text
 
-    invoice = result.get("invoice", {})
-    findings = result.get("findings", [])
-    compliance = result.get("compliance", {})
-    verification = result.get("verification", {})
-    report = result.get("report", {})
+            raise gr.Error(
+                f"❌ Backend Error\n\nReason: {error_detail}"
+            )
 
-    # ---------------- Invoice ----------------
-    invoice_text = f"""
+        result = response.json()
+
+        invoice = result.get("invoice", {})
+        findings = result.get("findings", [])
+        compliance = result.get("compliance", {})
+        verification = result.get("verification", {})
+        report = result.get("report", {})
+
+        # ---------------- INVOICE ----------------
+        invoice_text = f"""
 Invoice Number : {invoice.get("invoice_number", "-")}
 Vendor         : {invoice.get("vendor", "-")}
 Amount         : ₹{invoice.get("amount", "-")}
@@ -39,10 +53,10 @@ Invoice Date   : {invoice.get("date", "-")}
 GST            : ₹{invoice.get("gst", "-")}
 """
 
-    # ---------------- Anomaly ----------------
-    summary = report.get("summary", {})
+        # ---------------- ANOMALY ----------------
+        summary = report.get("summary", {})
 
-    anomaly_text = f"""
+        anomaly_text = f"""
 🔴 High   : {summary.get("high", 0)}
 🟠 Medium : {summary.get("medium", 0)}
 🟢 Low    : {summary.get("low", 0)}
@@ -50,16 +64,16 @@ GST            : ₹{invoice.get("gst", "-")}
 Total Findings : {summary.get("total_findings", 0)}
 """
 
-    # ---------------- Compliance ----------------
-    compliance_text = f"""
+        # ---------------- COMPLIANCE ----------------
+        compliance_text = f"""
 Status : {compliance.get("status", "-")}
 
 Violations:
 {chr(10).join(compliance.get("violations", []))}
 """
 
-    # ---------------- Verification ----------------
-    verification_text = f"""
+        # ---------------- VERIFICATION ----------------
+        verification_text = f"""
 Verified   : {verification.get("verified")}
 
 Confidence : {verification.get("confidence")} %
@@ -67,8 +81,8 @@ Confidence : {verification.get("confidence")} %
 Risk       : {verification.get("overall_risk")}
 """
 
-    # ---------------- Decision ----------------
-    decision_text = f"""
+        # ---------------- DECISION ----------------
+        decision_text = f"""
 Decision : {report.get("final_decision", "-")}
 
 Reason :
@@ -76,31 +90,49 @@ Reason :
 {report.get("reason", "")}
 """
 
-    # ---------------- PDF DOWNLOAD ----------------
-    pdf_url = report.get("pdf_url")
+        # ---------------- DOWNLOAD ----------------
+        pdf_url = report.get("pdf_url", "#")
 
-    download_html = f"""
-    <a href="{pdf_url}" target="_blank" style="
-        display:inline-block;
-        padding:10px 15px;
-        background:#2563eb;
-        color:white;
-        text-decoration:none;
-        border-radius:6px;
-        font-weight:bold;
-    ">
-    📥 Download Audit Report
-    </a>
-    """
+        download_html = f"""
+        <a href="{pdf_url}" target="_blank" style="
+            display:inline-block;
+            padding:10px 15px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:bold;
+        ">
+        📥 Download Audit Report
+        </a>
+        """
 
-    return (
-        invoice_text,
-        anomaly_text,
-        compliance_text,
-        verification_text,
-        decision_text,
-        download_html,
-    )
+        return (
+            invoice_text,
+            anomaly_text,
+            compliance_text,
+            verification_text,
+            decision_text,
+            download_html,
+        )
+
+    # ---------------- TIMEOUT HANDLING ----------------
+    except requests.exceptions.Timeout:
+        raise gr.Error(
+            "⏳ Request timed out.\n\nThe AI agent is taking longer than expected.\nTry again or use a smaller PDF."
+        )
+
+    # ---------------- NETWORK ERROR ----------------
+    except requests.exceptions.ConnectionError:
+        raise gr.Error(
+            "❌ Cannot connect to backend.\n\nMake sure FastAPI is running on port 8000."
+        )
+
+    # ---------------- GENERAL ERROR ----------------
+    except Exception as e:
+        raise gr.Error(
+            f"❌ Unexpected error occurred:\n\n{str(e)}"
+        )
 
 
 # ---------------- UI ----------------
@@ -109,6 +141,8 @@ with gr.Blocks(title="AuditIQ") as demo:
     gr.Markdown("""
 # 🧾 AuditIQ
 ### AI Powered Invoice Auditing System
+
+⏳ *Note: Processing may take 180–300 seconds depending on document size*
 """)
 
     pdf = gr.File(label="Upload Invoice", file_types=[".pdf"])
@@ -137,6 +171,7 @@ with gr.Blocks(title="AuditIQ") as demo:
             decision_box,
             download_box,
         ],
+        show_progress=True
     )
 
 demo.launch()
