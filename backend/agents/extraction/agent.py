@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
-from backend.agents.extraction.tools import extract_invoice_information
+from agents.extraction.tools import extract_invoice_information
 from dotenv import load_dotenv 
 
 load_dotenv()

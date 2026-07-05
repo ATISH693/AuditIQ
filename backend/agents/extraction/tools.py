@@ -1,7 +1,7 @@
 from google.adk.tools import ToolContext
-from backend.services.invoice_parser import extract_data
-from backend.database import save_invoice
-from backend.utils.logger import logger
+from services.invoice_parser import extract_data
+from database import save_invoice
+from utils.logger import logger
 
 
 def extract_invoice_information(tool_context: ToolContext):

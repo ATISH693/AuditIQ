@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
-from backend.agents.verification.tools import verify_audit
+from agents.verification.tools import verify_audit
 from dotenv import load_dotenv 
 
 load_dotenv()

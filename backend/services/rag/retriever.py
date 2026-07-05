@@ -1,7 +1,7 @@
 from pathlib import Path
 from langchain_chroma import Chroma
-from backend.services.rag.embeddings import get_embedding_model
-from backend.utils.logger import logger
+from services.rag.embeddings import get_embedding_model
+from utils.logger import logger
 
 VECTOR_DB_PATH = Path("backend/knowledge/chroma_db")
 

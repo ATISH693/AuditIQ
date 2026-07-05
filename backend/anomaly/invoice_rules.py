@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from backend.database import invoice_exists, vendor_exists, po_exists, get_po_amount, duplicate_payment_exists, get_total_invoice_amount
+from database import invoice_exists, vendor_exists, po_exists, get_po_amount, duplicate_payment_exists, get_total_invoice_amount
 
 def check_negative_amount(invoice: dict) : 
 

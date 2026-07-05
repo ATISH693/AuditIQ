@@ -2,8 +2,8 @@ import uuid
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
-from backend.agents.workflow import audit_workflow
-from backend.utils.logger import logger
+from agents.workflow import audit_workflow
+from utils.logger import logger
 
 APP_NAME = "AuditIQ"
 

@@ -1,5 +1,5 @@
-from backend.services.invoice_classifier_llm import ask_llm_invoice_type
-from backend.utils.logger import logger
+from services.invoice_classifier_llm import ask_llm_invoice_type
+from utils.logger import logger
 
 def is_invoice(text: str):
 

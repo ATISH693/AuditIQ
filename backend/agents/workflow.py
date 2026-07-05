@@ -1,10 +1,9 @@
 from google.adk.agents import SequentialAgent  
 
-from backend.agents.extraction.agent import extraction_agent
-from backend.agents.anomaly.agent import anomaly_agent
-from backend.agents.compliance.agent import compliance_agent
-from backend.agents.verification.agent import verification_agent
-from backend.agents.report.agent import report_agent
+from agents.extraction.agent import extraction_agent
+from agents.compliance.agent import compliance_agent
+from agents.verification.agent import verification_agent
+from agents.report.agent import report_agent
 
 
 

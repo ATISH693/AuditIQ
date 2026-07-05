@@ -1,4 +1,4 @@
-from backend.services.extraction_llm import ask_llm 
+from services.extraction_llm import ask_llm 
 import re 
 
 def extract_with_python(text: str) : 

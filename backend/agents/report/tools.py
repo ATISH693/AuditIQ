@@ -1,8 +1,8 @@
 from google.adk.tools import ToolContext
-from backend.services.report_generator import generate_report
-from backend.utils.logger import logger
-from backend.services.pdf_generator import generate_pdf
-from backend.database import save_audit_logs
+from services.report_generator import generate_report
+from utils.logger import logger
+from services.pdf_generator import generate_pdf
+from database import save_audit_logs
 from pathlib import Path
 
 def create_audit_report(tool_context: ToolContext):

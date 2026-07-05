@@ -1,7 +1,7 @@
 from google.adk.tools import ToolContext
 from backend.agents.compliance.check_compliance import check_compliance
-from backend.utils.logger import logger
-from backend.agents.anomaly.tools import run_anomaly_detection
+from utils.logger import logger
+from agents.anomaly.tools import run_anomaly_detection
 
 def check_invoice_compliance(tool_context: ToolContext):
 

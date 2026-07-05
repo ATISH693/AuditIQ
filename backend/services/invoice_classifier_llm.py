@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-from backend.utils.logger import logger
+from utils.logger import logger
 load_dotenv()
 
 llm = ChatGroq(

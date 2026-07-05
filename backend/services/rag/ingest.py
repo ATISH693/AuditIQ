@@ -2,7 +2,7 @@ from pathlib import Path
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from backend.services.rag.embeddings import get_embedding_model
+from services.rag.embeddings import get_embedding_model
 
 
 DOCUMENTS_PATH = Path("backend/knowledge/documents")

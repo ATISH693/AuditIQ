@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
-from backend.agents.compliance.tools import check_invoice_compliance, save_compliance_result
+from agents.compliance.tools import check_invoice_compliance, save_compliance_result
 from dotenv import load_dotenv 
 
 load_dotenv()

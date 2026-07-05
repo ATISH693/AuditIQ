@@ -1,6 +1,6 @@
-from backend.anomaly.check_anomalies import check_anomalies
-from backend.services.risk_service import calculate_risk
-from backend.database import save_audit_logs, save_invoice
+from anomaly.check_anomalies import check_anomalies
+from services.risk_service import calculate_risk
+from database import save_audit_logs, save_invoice
 
 def run_audit_pipeline(invoice: dict):
 

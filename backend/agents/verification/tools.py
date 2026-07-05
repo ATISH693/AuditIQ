@@ -1,5 +1,5 @@
 from google.adk.tools import ToolContext
-from backend.utils.logger import logger
+from utils.logger import logger
 
 
 def verify_audit(tool_context: ToolContext):

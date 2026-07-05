@@ -1,8 +1,8 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from backend.adk.runner import run_audit_workflow
-from backend.services.extraction_service import extract_pdf_text
-from backend.utils.logger import logger
-from backend.services.invoice_classifier import is_invoice
+from adk.runner import run_audit_workflow
+from services.extraction_service import extract_pdf_text
+from utils.logger import logger
+from services.invoice_classifier import is_invoice
 from fastapi.responses import FileResponse
 from pathlib import Path
 app = FastAPI() 

@@ -1,6 +1,6 @@
 from google.adk.tools import ToolContext
-from backend.anomaly.check_anomalies import check_anomalies
-from backend.utils.logger import logger
+from anomaly.check_anomalies import check_anomalies
+from utils.logger import logger
 
 
 def run_anomaly_detection(tool_context: ToolContext):

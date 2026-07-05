@@ -1,6 +1,6 @@
 from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
-from backend.agents.report.tools import create_audit_report
+from agents.report.tools import create_audit_report
 from dotenv import load_dotenv 
 
 load_dotenv()

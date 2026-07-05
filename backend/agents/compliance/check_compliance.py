@@ -1,4 +1,4 @@
-from backend.services.rag.retriever import retrieve_documents
+from services.rag.retriever import retrieve_documents
 
 
 def check_compliance(invoice: dict):

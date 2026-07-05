@@ -1,4 +1,4 @@
-from backend.anomaly.invoice_rules import (check_negative_amount, 
+from anomaly.invoice_rules import (check_negative_amount, 
                                             check_missing_vendor, 
                                             check_missing_invoice_no, 
                                             check_missing_gst, 

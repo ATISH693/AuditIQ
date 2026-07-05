@@ -1,5 +1,5 @@
 import asyncio
-from backend.adk.runner import run_audit_workflow
+from adk.runner import run_audit_workflow
 
 pdf_text = """
 ==================== TAX INVOICE ====================
