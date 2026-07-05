@@ -27,3 +27,9 @@ sentencepiece
 
 numpy
 pydantic
+
+google-generativeai
+google-genai
+google-ai-generativelanguage
+google-api-python-client
+google-auth
